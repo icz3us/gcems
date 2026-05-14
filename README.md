@@ -18,7 +18,7 @@ A centralized event management system for Gordon College
 
 
 
-**GCEF (Gordon College Event  Portal)** is a web-based platform designed to centralize and streamline campus event management.
+**GCEP (Gordon College Event  Portal)** is a web-based platform designed to centralize and streamline campus event management.
 
 
 
