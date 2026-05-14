@@ -6,6 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'GCEP - Gordon College Event Portal') }}</title>
+    <link rel="icon" type="image/png" href="{{ asset('assets/gcef1.png') }}">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">

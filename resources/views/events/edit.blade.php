@@ -7,7 +7,7 @@
         <p class="mt-3 max-w-2xl text-lg gc-subtle">Update the event record while keeping the current image unless a replacement is selected.</p>
     </div>
 
-    <div class="max-w-4xl">
+    <div class="w-full">
         <form method="POST" action="{{ route('events.update', $event) }}" enctype="multipart/form-data" class="gc-card rounded-[1.8rem] p-6 sm:p-8">
             @method('PUT')
             @include('events._form')

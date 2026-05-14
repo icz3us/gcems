@@ -1,0 +1,176 @@
+GC-EMS Setup Guide
+==================
+
+Use this guide to set up the GC-EMS Laravel project on another computer.
+
+
+Requirements
+------------
+
+Install these first:
+
+1. PHP 8.2 or newer
+2. Composer
+3. Node.js and npm
+4. MySQL or XAMPP with MySQL enabled
+5. Git
+
+
+Clone the Project
+-----------------
+
+git clone https://github.com/icz3us/gcems.git
+cd gcems
+
+
+Install Dependencies
+--------------------
+
+composer install
+npm install
+
+
+Create Environment File
+-----------------------
+
+copy .env.example .env
+
+Then generate the Laravel app key:
+
+php artisan key:generate
+
+
+Create the Database
+-------------------
+
+Open MySQL or phpMyAdmin and create a database named:
+
+gcems
+
+SQL command:
+
+CREATE DATABASE gcems;
+
+
+Configure .env
+--------------
+
+Open the .env file and update the database settings:
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=gcems
+DB_USERNAME=root
+DB_PASSWORD=
+
+If your MySQL has a password, set DB_PASSWORD to your MySQL password.
+
+
+Cloudinary Setup
+----------------
+
+The event image upload feature uses Cloudinary.
+
+Each groupmate should add valid Cloudinary credentials to their own .env file:
+
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+CLOUDINARY_EVENT_FOLDER=gcems/events
+
+Important:
+
+Do not commit the .env file.
+Do not share real API secrets in GitHub, Messenger, screenshots, or public chats.
+Only .env.example should be committed, and it should use blank or placeholder values.
+
+
+Run Migrations and Seeders
+--------------------------
+
+php artisan migrate --seed
+
+If you need to reset the database:
+
+php artisan migrate:fresh --seed
+
+Warning: migrate:fresh deletes existing local database tables and recreates them.
+
+
+Build Frontend Assets
+---------------------
+
+npm run build
+
+If PowerShell blocks npm with an execution policy error, use:
+
+& "C:\Program Files\nodejs\npm.cmd" run build
+
+
+Run the Application
+-------------------
+
+php artisan serve
+
+Open the app in your browser:
+
+http://127.0.0.1:8000
+
+
+Common Git Issue: Dubious Ownership
+-----------------------------------
+
+If Git shows this error:
+
+fatal: detected dubious ownership in repository
+
+Run this command, replacing the path with your own project path:
+
+git config --global --add safe.directory C:/path/to/your/gcems
+
+Example:
+
+git config --global --add safe.directory C:/Users/YourName/Desktop/gcems
+
+
+Useful Commands
+---------------
+
+Run tests:
+
+php artisan test
+
+Format PHP code:
+
+vendor\bin\pint --dirty
+
+Clear Laravel cache:
+
+php artisan optimize:clear
+
+Rebuild frontend:
+
+npm run build
+
+
+Before Pushing to GitHub
+------------------------
+
+Make sure these are not committed:
+
+1. .env
+2. vendor/
+3. node_modules/
+4. storage/logs/*
+5. Any real API keys or passwords
+
+Check files before committing:
+
+git status
+
+Commit example:
+
+git add .
+git commit -m "Update GC-EMS setup"
+git push origin main

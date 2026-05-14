@@ -7,7 +7,7 @@
         <p class="mt-3 max-w-2xl text-lg gc-subtle">Publish a campus event with registration details and a Cloudinary-hosted image.</p>
     </div>
 
-    <div class="max-w-4xl">
+    <div class="w-full">
         <form method="POST" action="{{ route('events.store') }}" enctype="multipart/form-data" class="gc-card rounded-[1.8rem] p-6 sm:p-8">
             @include('events._form')
             

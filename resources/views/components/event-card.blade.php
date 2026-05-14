@@ -44,6 +44,13 @@
     <!-- Top banner/color bar -->
     <div class="h-1.5 w-full {{ $barColor }}"></div>
 
+    @if($registered)
+        <div
+            class="absolute -right-10 top-10 z-10 bg-green-500 text-white text-[10px] font-bold uppercase tracking-wider py-1 px-12 rotate-45 shadow-sm">
+            Registered
+        </div>
+    @endif
+
     @if($imageSrc)
         <div class="aspect-video w-full overflow-hidden bg-gray-100">
             <img src="{{ $imageSrc }}" alt="{{ $titleText }} event image"
@@ -60,13 +67,6 @@
     @endif
 
     <div class="p-5 flex flex-col flex-grow relative">
-        @if($registered)
-            <div
-                class="absolute -right-12 top-4 bg-green-500 text-white text-[10px] font-bold uppercase tracking-wider py-1 px-12 rotate-45 shadow-sm z-1">
-                Registered
-            </div>
-        @endif
-
         <div class="flex justify-between items-start mb-4 gap-3 pr-4">
             <h3 class="text-lg font-black text-slate-950 leading-tight group-hover:text-[#007a34] transition-colors">
                 {{ $titleText }}

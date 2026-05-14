@@ -23,8 +23,10 @@ class RegisteredUserController extends Controller
     {
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users,email'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'ends_with:@gordoncollege.edu.ph', 'unique:users,email'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ], [
+            'email.ends_with' => 'Please use your Gordon College email address ending in @gordoncollege.edu.ph.',
         ]);
 
         $user = User::create([

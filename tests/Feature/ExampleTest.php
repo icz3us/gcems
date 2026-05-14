@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class ExampleTest extends TestCase
@@ -17,7 +18,7 @@ class ExampleTest extends TestCase
     {
         $this->get('/')
             ->assertOk()
-            ->assertSee('GC-EMS');
+            ->assertSee('GCEP');
     }
 
     public function test_student_can_register_once_for_an_available_event(): void
@@ -65,16 +66,87 @@ class ExampleTest extends TestCase
     {
         $this->post(route('register'), [
             'name' => 'New User',
-            'email' => 'new@example.com',
+            'email' => 'new@gordoncollege.edu.ph',
             'role' => 'admin',
             'password' => 'password',
             'password_confirmation' => 'password',
         ])->assertRedirect(route('dashboard'));
 
         $this->assertDatabaseHas('users', [
-            'email' => 'new@example.com',
+            'email' => 'new@gordoncollege.edu.ph',
             'role' => 'student',
         ]);
+    }
+
+    public function test_public_registration_requires_gordon_college_email(): void
+    {
+        $this->post(route('register'), [
+            'name' => 'External User',
+            'email' => 'external@example.com',
+            'password' => 'password',
+            'password_confirmation' => 'password',
+        ])->assertSessionHasErrors('email');
+
+        $this->assertDatabaseMissing('users', [
+            'email' => 'external@example.com',
+        ]);
+    }
+
+    public function test_user_can_view_profile_page(): void
+    {
+        $student = User::factory()->create(['role' => 'student']);
+
+        $this->actingAs($student)
+            ->get(route('profile.edit'))
+            ->assertOk()
+            ->assertSee('My Profile');
+    }
+
+    public function test_user_can_update_profile_and_upload_photo(): void
+    {
+        Storage::fake('public');
+
+        $student = User::factory()->create([
+            'role' => 'student',
+            'email' => 'student@gordoncollege.edu.ph',
+        ]);
+
+        $photo = UploadedFile::fake()->image('profile.jpg', 600, 600)->size(500);
+
+        $this->actingAs($student)
+            ->patch(route('profile.update'), [
+                'name' => 'Updated Student',
+                'username' => 'updatedstudent',
+                'profile_photo' => $photo,
+            ])
+            ->assertSessionHasNoErrors()
+            ->assertSessionHas('status', 'Profile updated successfully.');
+
+        $student->refresh();
+
+        $this->assertSame('Updated Student', $student->name);
+        $this->assertSame('updatedstudent', $student->username);
+        $this->assertSame('student@gordoncollege.edu.ph', $student->email);
+        $this->assertNotNull($student->profile_photo_path);
+        Storage::disk('public')->assertExists($student->profile_photo_path);
+    }
+
+    public function test_profile_update_does_not_change_email(): void
+    {
+        $student = User::factory()->create([
+            'role' => 'student',
+            'email' => 'student@gordoncollege.edu.ph',
+        ]);
+
+        $this->actingAs($student)
+            ->patch(route('profile.update'), [
+                'name' => $student->name,
+                'username' => $student->username,
+                'email' => 'student@example.com',
+            ])
+            ->assertSessionHasNoErrors();
+
+        $this->assertSame('student@gordoncollege.edu.ph', $student->fresh()->email);
     }
 
     public function test_admin_cannot_access_user_management(): void

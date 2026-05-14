@@ -7,6 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'GCEP - Gordon College Event Portal') }} - Dashboard</title>
+    <link rel="icon" type="image/png" href="{{ asset('assets/gcef1.png') }}">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -67,7 +68,6 @@
                     </svg>
                     Dashboard
                 </a>
-
                 @php $isAdmin = auth()->check() && in_array(auth()->user()->role ?? '', ['admin', 'super_admin']); @endphp
                 @php $isSuperAdmin = auth()->check() && (auth()->user()->role ?? '') === 'super_admin'; @endphp
 
@@ -107,6 +107,17 @@
                         User Management
                     </a>
                 @endif
+
+                <a href="{{ route('profile.edit') }}"
+                    class="flex items-center px-4 py-3 text-sm font-bold rounded-2xl border border-transparent transition-colors {{ request()->routeIs('profile.*') ? 'gc-nav-active' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }}">
+                    <svg class="w-5 h-5 mr-3 {{ request()->routeIs('profile.*') ? 'text-[#007a34]' : 'text-slate-500' }}"
+                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M5.121 17.804A9 9 0 1118.879 17.8M15 11a3 3 0 11-6 0 3 3 0 016 0z">
+                        </path>
+                    </svg>
+                    My Profile
+                </a>
             </nav>
 
             <!-- User Profile & Logout -->
@@ -120,11 +131,15 @@
                         Create Event
                     </a>
                 @endif
-                <div class="flex items-center">
+                <a href="{{ route('profile.edit') }}" class="flex items-center rounded-2xl transition-colors hover:bg-slate-50">
                     <div class="flex-shrink-0">
-                        <div
-                            class="w-11 h-11 rounded-2xl bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-700 font-black">
-                            {{ substr(auth()->user()->name ?? 'U', 0, 1) }}
+                        <div class="w-11 h-11 overflow-hidden rounded-2xl bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-700 font-black">
+                            @if(auth()->user()->profile_photo_path)
+                                <img src="{{ Storage::url(auth()->user()->profile_photo_path) }}" alt="{{ auth()->user()->name }} profile photo"
+                                    class="h-full w-full object-cover">
+                            @else
+                                {{ substr(auth()->user()->name ?? 'U', 0, 1) }}
+                            @endif
                         </div>
                     </div>
                     <div class="ml-3">
@@ -135,7 +150,7 @@
                             {{ auth()->user()->role ?? 'Student' }}
                         </p>
                     </div>
-                </div>
+                </a>
                 <button @click="logoutModalOpen = true"
                     class="mt-4 w-full flex items-center justify-center px-4 py-2.5 border border-slate-200 text-sm font-bold rounded-xl text-slate-600 bg-white hover:bg-slate-50 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -181,21 +196,12 @@
                         placeholder="Search for events, users, or registrations...">
                 </div>
                 <div class="flex items-center gap-5">
-                    <button class="relative rounded-xl p-2 text-slate-500 hover:bg-slate-50 hover:text-slate-900">
-                        <span class="absolute right-2 top-2 h-2 w-2 rounded-full bg-red-500"></span>
-                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15 17h5l-1.4-1.4A2 2 0 0118 14.2V11a6 6 0 10-12 0v3.2c0 .5-.2 1-.6 1.4L4 17h5m6 0a3 3 0 01-6 0">
-                            </path>
-                        </svg>
-                    </button>
-                    <div class="h-8 w-px bg-slate-200"></div>
-                    <div class="text-right">
+                    <a href="{{ route('profile.edit') }}" class="text-right">
                         <p class="text-sm font-black text-slate-900">{{ auth()->user()->name ?? 'Admin Portal' }}</p>
                         <p class="text-xs font-semibold text-slate-400 capitalize">
                             {{ str_replace('_', ' ', auth()->user()->role ?? 'User') }}
                         </p>
-                    </div>
+                    </a>
                 </div>
             </div>
 

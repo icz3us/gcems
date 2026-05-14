@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>GCEP - Sign-Up</title>
+    <link rel="icon" type="image/png" href="{{ asset('assets/gcef1.png') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
@@ -58,10 +59,11 @@
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-zinc-700 mb-1.5">Email Address</label>
-                    <input type="email" name="email" value="{{ old('email') }}" placeholder="your-email@example.com"
+                    <label class="block text-sm font-medium text-zinc-700 mb-1.5">Gordon College Email Address</label>
+                    <input type="email" name="email" value="{{ old('email') }}" placeholder="yourname@gordoncollege.edu.ph"
                         required
                         class="w-full border border-zinc-300 focus:border-green-600 focus:ring-2 focus:ring-green-600/20 rounded-xl px-4 py-3.5 text-zinc-900 placeholder-zinc-400 transition-all outline-none text-sm font-medium">
+                    <p class="mt-2 text-xs font-medium text-zinc-500">Only @gordoncollege.edu.ph email addresses are accepted.</p>
                 </div>
 
                 <div>

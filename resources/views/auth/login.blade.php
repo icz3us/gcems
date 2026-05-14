@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>GCEP - Sign-In</title>
+    <link rel="icon" type="image/png" href="{{ asset('assets/gcef1.png') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
@@ -35,13 +36,17 @@
         </div>
 
         <div class="w-full max-w-md my-auto">
+            @php
+                $currentPortal = request()->query('portal', 'student');
+            @endphp
+
             <h2 class="text-3xl font-extrabold text-zinc-900 mb-2">
-                @if(request()->query('portal') === 'admin')
+                @if($currentPortal === 'admin')
                     Admin Login
-                @elseif(request()->query('portal') === 'superadmin')
+                @elseif($currentPortal === 'superadmin')
                     Super Admin Login
                 @else
-                    Sign in to your account
+                    Student Login
                 @endif
             </h2>
             <p class="text-zinc-500 mb-8">Enter your credentials to access the portal</p>
@@ -72,7 +77,40 @@
                 </button>
             </form>
 
-            @if(!in_array(request()->query('portal'), ['admin', 'superadmin']))
+            <div class="mt-6 rounded-2xl border border-green-100 bg-green-50/60 p-5 shadow-sm">
+                <div class="text-center">
+                    <p class="text-xs font-bold uppercase tracking-[0.18em] text-green-700">Switch Portal</p>
+                    <p class="mt-2 text-sm leading-6 text-zinc-600">
+                        Select the login page that matches your account role.
+                    </p>
+                </div>
+
+                <div class="mt-4 flex flex-wrap justify-center gap-3 text-sm font-bold">
+                    @if($currentPortal !== 'student')
+                        <a href="{{ route('login') }}"
+                            class="inline-flex min-w-32 items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-zinc-200 bg-white px-5 py-3 text-zinc-700 transition-colors hover:border-green-300 hover:bg-white hover:text-green-700">
+                            <i data-lucide="graduation-cap" class="h-4 w-4"></i>
+                            Student
+                        </a>
+                    @endif
+                    @if($currentPortal !== 'admin')
+                        <a href="{{ route('login', ['portal' => 'admin']) }}"
+                            class="inline-flex min-w-32 items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-zinc-200 bg-white px-5 py-3 text-zinc-700 transition-colors hover:border-green-300 hover:bg-white hover:text-green-700">
+                            <i data-lucide="calendar-plus" class="h-4 w-4"></i>
+                            Admin
+                        </a>
+                    @endif
+                    @if($currentPortal !== 'superadmin')
+                        <a href="{{ route('login', ['portal' => 'superadmin']) }}"
+                            class="inline-flex min-w-32 items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-zinc-200 bg-white px-5 py-3 text-zinc-700 transition-colors hover:border-green-300 hover:bg-white hover:text-green-700">
+                            <i data-lucide="shield-check" class="h-4 w-4"></i>
+                            Super Admin
+                        </a>
+                    @endif
+                </div>
+            </div>
+
+            @if($currentPortal === 'student')
                 <p class="text-center text-zinc-600 mt-8 font-medium text-sm">
                     Don't have an account?
                     <a href="{{ route('register') }}"

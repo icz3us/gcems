@@ -149,19 +149,6 @@
                     @endfor
                 </div>
             </section>
-
-            <section class="rounded-[1.8rem] bg-[#0b1328] p-8 text-white shadow-xl shadow-slate-900/15">
-                <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 text-emerald-300">
-                    <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 7h16M4 12h16M4 17h16"></path>
-                    </svg>
-                </div>
-                <p class="mt-8 text-xs font-black uppercase tracking-[0.22em] text-emerald-300">Security Update</p>
-                <h2 class="mt-4 text-2xl font-medium">Server Maintenance Scheduled</h2>
-                <p class="mt-5 text-sm leading-7 text-slate-400">System synchronization notices and registry
-                    availability updates appear here.</p>
-            </section>
         </aside>
     </div>
 </x-layouts.app>
