@@ -9,11 +9,26 @@ use Illuminate\View\View;
 
 class UserManagementController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View
     {
-        $users = User::orderBy('role', 'desc')
+        $query = User::query();
+
+        if ($request->has('search')) {
+            $search = $request->get('search');
+            $query->where(function($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('email', 'like', "%{$search}%");
+            });
+        }
+
+        if ($request->has('role') && $request->role != '') {
+            $query->where('role', $request->role);
+        }
+
+        $users = $query->orderBy('role', 'desc')
             ->orderBy('name')
-            ->paginate(12);
+            ->paginate(12)
+            ->withQueryString();
 
         return view('users.index', compact('users'));
     }

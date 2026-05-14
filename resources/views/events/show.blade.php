@@ -66,8 +66,11 @@
             <!-- Left Column: Description -->
             <article class="gc-card rounded-[1.8rem] overflow-hidden">
                 @if ($event->image_url)
-                    <div class="aspect-video w-full bg-gray-100">
-                        <img src="{{ $event->image_url }}" alt="{{ $event->title }} event image" class="h-full w-full object-cover">
+                    <div class="aspect-video w-full bg-gray-100 flex items-center justify-center overflow-hidden">
+                        <img src="{{ $event->image_url }}" 
+                            alt="{{ $event->title }} event image" 
+                            class="h-full w-full object-cover"
+                            onerror="this.onerror=null; this.src='{{ asset('assets/gclogo.png') }}'; this.classList.remove('object-cover'); this.classList.add('object-contain', 'p-12')">
                     </div>
                 @endif
 

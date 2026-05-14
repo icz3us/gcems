@@ -17,7 +17,10 @@ Route::get('/', function () {
         ->get();
 
     return view('welcome', compact('upcomingEvents'));
-});
+})->name('landing');
+
+Route::view('/terms', 'terms')->name('terms');
+Route::view('/privacy', 'privacy')->name('privacy');
 
 Route::middleware('guest')->group(function () {
     Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');

@@ -1,176 +1,231 @@
-<x-layouts.guest>
-    <section class="bg-[#f3f9ef]">
-        <div class="mx-auto grid min-h-[720px] max-w-7xl grid-cols-1 items-center gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1fr_0.9fr] lg:px-8">
-            <div>
-                <h1 class="max-w-2xl text-5xl font-medium uppercase leading-[0.98] tracking-normal text-slate-950 sm:text-6xl lg:text-7xl">
-                    Coordinate.<br>
-                    Schedule.<br>
-                    Excel.
-                </h1>
-                <p class="mt-8 max-w-xl text-base leading-7 text-slate-600">
-                    A focused event workspace for Gordon College organizers, students, and campus teams to plan, publish, and track activities in one place.
-                </p>
-                <div class="mt-8 flex flex-wrap gap-3">
-                    <a href="#events" class="rounded-2xl gc-btn-primary px-6 py-3 text-sm font-bold transition-colors">
-                        Browse Events
-                    </a>
-                    @guest
-                        <a href="{{ route('login') }}" class="rounded-2xl gc-btn-secondary px-6 py-3 text-sm font-bold transition-colors hover:bg-slate-50">
-                            Portal Login
-                        </a>
-                    @endguest
+@extends('layouts.app')
+@section('title', 'GCEP - Gordon College Event Portal')
+@push('styles')
+    <style>
+        .home-hero-bg {
+            background:
+                linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
+                url('{{ asset('assets/gc.jpg') }}') center / cover no-repeat;
+        }
+
+        .home-bg {
+            background:
+                linear-gradient(rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.45)),
+                url('{{ asset('assets/regCTA.jpg') }}') center / cover;
+        }
+    </style>
+@endpush
+@section('content')
+    <header class="home-hero-bg relative overflow-hidden min-h-screen flex items-center text-white">
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center w-full">
+            <div class="home-animate-fade-in">
+                <div class="flex justify-center mb-8">
+                    <div
+                        class="w-26 h-26 rounded-full overflow-hidden shadow-2xl border-4 border-white/80 bg-white flex items-center justify-center">
+                        <img src="{{ asset('assets/gcep.png') }}" alt="Gordon College Logo"
+                            class="w-25 h-25 object-contain">
+                    </div>
                 </div>
 
-                <div class="mt-14 grid max-w-xl grid-cols-2 gap-6 sm:grid-cols-4">
-                    <div>
-                        <p class="text-3xl font-black text-slate-950">150+</p>
-                        <p class="mt-1 text-xs font-semibold text-slate-500">Active records</p>
-                    </div>
-                    <div>
-                        <p class="text-3xl font-black text-slate-950">5.0</p>
-                        <p class="mt-1 text-xs font-semibold text-slate-500">Portal rating</p>
-                    </div>
-                    <div>
-                        <p class="text-3xl font-black text-slate-950">24/7</p>
-                        <p class="mt-1 text-xs font-semibold text-slate-500">System uptime</p>
-                    </div>
-                    <div class="rounded-2xl bg-[#007a34] p-4 text-white">
-                        <p class="text-2xl font-black">99%</p>
-                        <p class="mt-1 text-[11px] font-semibold text-white/80">Campus ready</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="relative">
-                <div class="rounded-[2rem] border-[8px] border-white bg-gradient-to-br from-sky-300 via-slate-100 to-slate-900 p-6 shadow-2xl shadow-slate-900/15">
-                    <div class="relative aspect-[4/3] overflow-hidden rounded-[1.4rem] bg-[#dff3ff]">
-                        <div class="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-slate-900 to-transparent"></div>
-                        <div class="absolute bottom-10 left-8 right-8 grid grid-cols-3 gap-4">
-                            <div class="h-48 rounded-t-[4rem] bg-white/85 shadow-lg"></div>
-                            <div class="h-72 rounded-t-full bg-white shadow-xl"></div>
-                            <div class="h-52 rounded-t-[4rem] bg-white/80 shadow-lg"></div>
-                        </div>
-                        <div class="absolute left-10 top-16 h-4 w-36 rounded-full bg-white/60"></div>
-                        <div class="absolute right-14 top-24 h-3 w-28 rounded-full bg-white/50"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="platform" class="bg-white py-20">
-        <div class="mx-auto grid max-w-7xl grid-cols-1 items-center gap-14 px-4 sm:px-6 lg:grid-cols-[0.9fr_1fr] lg:px-8">
-            <div>
-                <h2 class="max-w-lg text-4xl font-medium uppercase leading-tight tracking-normal text-slate-950 sm:text-5xl">
-                    A platform designed for institutional success
+                <h1 class="text-6xl md:text-7xl font-black mb-4 drop-shadow-lg tracking-tight">GCEP</h1>
+                <h2 class="text-2xl md:text-3xl font-semibold mb-6 leading-tight text-white/90">
+                    Welcome to the Gordon College Event Portal
                 </h2>
-                <p class="mt-6 max-w-xl text-base leading-7 text-slate-600">
-                    GC-EMS supports event creation, participant registration, venue visibility, and role-based workflows for campus operations.
+                <p class="text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed">
+                    Your gateway to all school events, schedules, and activities.<br>
+                    Stay informed and connected with us.
                 </p>
-                <a href="{{ route('login') }}" class="mt-7 inline-flex rounded-2xl gc-btn-secondary px-5 py-3 text-sm font-bold transition-colors hover:bg-slate-50">
-                    Learn about the process
+
+            </div>
+
+            <div class="mt-10 home-animate-fade-in-delay">
+                <a href="{{ route('register') }}"
+                    class="inline-flex items-center gap-3 bg-gradient-to-r from-green-800 to-emerald-600 hover:from-green-500 hover:to-emerald-400 text-white px-8 py-4 rounded-xl text-lg font-bold transition-all duration-300 shadow-[0_8px_20px_rgba(34,197,94,0.4)] hover:shadow-[0_12px_25px_rgba(34,197,94,0.6)]">
+                    <span>Sign up for Upcoming Events</span>
                 </a>
             </div>
-            <div class="relative overflow-hidden rounded-2xl bg-[linear-gradient(135deg,#f8fafc,#dfeee3)] p-8 shadow-xl shadow-slate-900/10">
-                <div class="aspect-[16/9] overflow-hidden rounded-xl bg-[linear-gradient(180deg,#8d6b3d,#f0c36a_48%,#0f766e_49%,#0f766e_58%,#d19b45_59%)]">
-                    <div class="grid h-full grid-rows-6 gap-2 p-8">
-                        @for ($i = 0; $i < 6; $i++)
-                            <div class="rounded bg-white/25"></div>
-                        @endfor
+            <p class="text-md md:text-xs text-white/80 max-w-2xl mx-auto leading-relaxed mt-8">Sign up now to view upcoming
+                activities,seminars, and school events!</p>
+        </div>
+    </header>
+    <main id="portals" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+
+        <div class="text-center mb-14 home-animate-fade-in-delay">
+            <h3 class="text-3xl font-bold text-gray-900 mb-3">Select Your Portal</h3>
+            <p class="text-lg text-gray-500 max-w-xl mx-auto">
+                Access features designed for students and administrators.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            @php
+                $portals = [
+                    [
+                        'href' => route('login'),
+                        'icon' => 'fa-user-graduate',
+                        'label' => 'Student Portal',
+                        'desc' => 'Discover events, register for activities, and manage your schedule easily!',
+                    ],
+                    [
+                        'href' => route('login', ['portal' => 'admin']),
+                        'icon' => 'fa-cog',
+                        'label' => 'Admin Portal',
+                        'desc' => 'Full control over event management, user access, and system configurations.',
+                    ],
+                    [
+                        'href' => route('login', ['portal' => 'superadmin']),
+                        'icon' => 'fa-user-shield',
+                        'label' => 'Super Admin Portal',
+                        'desc' => 'Highest level access for system overrides, role management, and logs.',
+                    ],
+                ];
+            @endphp
+
+            @foreach ($portals as $portal)
+                <a href="{{ $portal['href'] }}"
+                    class="group block bg-white rounded-2xl shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-400 ease-in-out border border-gray-100 home-animate-fade-in-item">
+                    <div class="p-8 text-center">
+                        <div
+                            class="mx-auto mb-5 p-4 bg-white rounded-2xl w-20 h-20 flex items-center justify-center transition-colors">
+                            <i class="fas {{ $portal['icon'] }} text-3xl text-green-600"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-green-600">
+                            {{ $portal['label'] }}
+                        </h3>
+                        <p class="text-gray-500 text-sm leading-relaxed">
+                            {{ $portal['desc'] }}
+                        </p>
                     </div>
-                </div>
-                <div class="absolute bottom-8 right-8 rounded-2xl bg-white p-5 shadow-xl">
-                    <p class="text-xs font-bold uppercase tracking-[0.18em] text-slate-400">Capacity</p>
-                    <p class="mt-2 text-sm font-black text-slate-950">Smart registration</p>
-                </div>
+                </a>
+            @endforeach
+
+        </div>
+    </main>
+    <section id="how-it-works" class="home-bg relative overflow-hidden min-h-[34rem] flex items-center text-white">
+        <div class="max-w-7xl mx-auto px-4 py-5 sm:px-6 lg:px-8">
+
+            <div class="text-center mb-14">
+                <h3 class="text-3xl font-bold text-gray-100 mb-3">How It Works</h3>
+                <p class="text-lg text-gray-400 max-w-xl mx-auto">Get started in four simple steps.</p>
+            </div>
+
+            @php
+                $steps = [
+                    ['icon' => 'fa-user-plus', 'title' => 'Register', 'desc' => 'Create your account using your official school credentials to get started.'],
+                    ['icon' => 'fa-sign-in-alt', 'title' => 'Login', 'desc' => 'Access your personalized portal to see features tailored for you.'],
+                    ['icon' => 'fa-search', 'title' => 'Browse Events', 'desc' => 'Explore the event feed to find upcoming school activities, seminars, and more.'],
+                    ['icon' => 'fa-check', 'title' => 'Join & Participate', 'desc' => 'Join an event and enjoy the experience.'],
+                ];
+            @endphp
+
+            <div class="flex flex-col lg:flex-row lg:flex-nowrap items-stretch justify-center gap-y-8 gap-x-4">
+
+                @foreach ($steps as $index => $step)
+
+                    <div class="relative text-center w-full max-w-xs mx-auto lg:max-w-none lg:w-1/4">
+                        <div
+                            class="bg-white/80 rounded-2xl shadow-md p-7 border border-gray-100 h-full flex flex-col hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                            <div class="mx-auto mb-5 flex items-center justify-center w-16 h-16 bg-green-50 rounded-2xl">
+                                <i class="fas {{ $step['icon'] }} text-2xl text-green-600"></i>
+                            </div>
+                            <h4 class="text-lg font-bold text-gray-900 mb-2">{{ $step['title'] }}</h4>
+                            <p class="text-gray-800 text-sm px-1 flex-grow leading-relaxed">{{ $step['desc'] }}</p>
+                        </div>
+                    </div>
+
+                    @if ($index < count($steps) - 1)
+                        <div class="hidden lg:flex items-center justify-center text-gray-300">
+                            <i class="fas fa-arrow-right text-3xl"></i>
+                        </div>
+                    @endif
+                @endforeach
+
             </div>
         </div>
     </section>
+    <section id="faq" class="bg-gray-100 py-20">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
 
-    <section class="bg-white pb-20">
-        <div class="mx-auto grid max-w-7xl gap-6 px-4 sm:px-6 md:grid-cols-3 lg:px-8">
-            <article class="rounded-2xl bg-[#0b1328] p-8 text-white shadow-xl shadow-slate-900/10">
-                <div class="mb-16 flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-500">
-                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                </div>
-                <h3 class="text-xl font-black">Unified Scheduling</h3>
-                <p class="mt-3 text-sm leading-6 text-slate-300">Turn scattered campus activity into a clear event pipeline.</p>
-            </article>
-            <article class="rounded-2xl bg-slate-100 p-8 text-slate-950">
-                <div class="mb-16 flex h-12 w-12 items-center justify-center rounded-xl bg-white text-[#007a34]">
-                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657 13.414 20.9a2 2 0 0 1-2.828 0l-4.243-4.243a8 8 0 1 1 11.314 0z"></path></svg>
-                </div>
-                <h3 class="text-xl font-black">Venue Management</h3>
-                <p class="mt-3 text-sm leading-6 text-slate-600">Keep event locations visible and easy to scan.</p>
-            </article>
-            <article class="rounded-2xl bg-[#007a34] p-8 text-white shadow-xl shadow-green-900/10">
-                <div class="mb-16 flex -space-x-2">
-                    <span class="h-9 w-9 rounded-full border-2 border-white bg-slate-800"></span>
-                    <span class="h-9 w-9 rounded-full border-2 border-white bg-slate-500"></span>
-                    <span class="h-9 w-9 rounded-full border-2 border-white bg-emerald-400"></span>
-                </div>
-                <h3 class="text-xl font-black">Deep Analytics</h3>
-                <p class="mt-3 text-sm leading-6 text-white/75">Monitor registration demand and upcoming event capacity.</p>
-            </article>
-        </div>
-    </section>
+            <div class="text-center mb-12 home-animate-fade-in-delay">
+                <h3 class="text-3xl font-bold text-gray-900 mb-3">Frequently Asked Questions</h3>
+                <p class="text-lg text-gray-500">Have questions? We've got answers.</p>
+            </div>
 
-    <section class="bg-slate-50 py-20">
-        <div class="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
-            <h2 class="text-4xl font-medium uppercase tracking-normal text-slate-950">Browse Categories</h2>
-            <p class="mt-3 text-sm text-slate-500">Explore common event groups across campus operations.</p>
-            <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                @foreach ([
-                    ['Academic', 'Seminars & workshops', 'bg-emerald-50 border-emerald-100'],
-                    ['Cultural', 'Exhibits & arts', 'bg-sky-50 border-sky-100'],
-                    ['Institutional', 'Meetings & briefings', 'bg-violet-50 border-violet-100'],
-                    ['Athletic', 'Sports & fitness', 'bg-orange-50 border-orange-100'],
-                ] as [$name, $copy, $tone])
-                    <article class="rounded-2xl border {{ $tone }} p-8">
-                        <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-white text-slate-900 shadow-sm">
-                            <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12m6-6H6"></path></svg>
+            @php
+                $faqs = [
+                    [
+                        'q' => 'What is GCEP?',
+                        'a' => 'GCEP (Gordon College Event Portal) is the centralized platform for managing and viewing all campus events. It keeps students and administrators connected and informed.',
+                    ],
+                    [
+                        'q' => 'Who can create events on the platform?',
+                        'a' => 'Events can be created by authorized admin only. ',
+                    ],
+                    [
+                        'q' => 'Can I see events from other departments?',
+                        'a' => "Yes! The main feed shows all public campus-wide events. You can also filter events by department to find what's most relevant to you.",
+                    ],
+                ];
+            @endphp
+
+            <div class="space-y-4">
+                @foreach ($faqs as $index => $faq)
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                        <button onclick="homeToggleFaq(this)" id="faq-btn-{{ $index }}" aria-expanded="false"
+                            aria-controls="faq-panel-{{ $index }}"
+                            class="w-full flex justify-between items-center text-left px-6 py-5 font-semibold text-gray-800 hover:bg-gray-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7cb93c] transition-colors">
+                            <span class="text-base">{{ $faq['q'] }}</span>
+                            <i class="fas fa-chevron-down text-gray-400 transform transition-transform duration-300 shrink-0 ml-4"
+                                aria-hidden="true"></i>
+                        </button>
+                        <div id="faq-panel-{{ $index }}" role="region" aria-labelledby="faq-btn-{{ $index }}"
+                            class="grid grid-rows-[0fr] opacity-0 transition-all duration-300 ease-in-out overflow-hidden">
+                            <div class="overflow-hidden">
+                                <p class="px-6 pb-5 text-gray-500 text-sm leading-relaxed">{{ $faq['a'] }}</p>
+                            </div>
                         </div>
-                        <h3 class="mt-6 text-sm font-black text-slate-950">{{ $name }}</h3>
-                        <p class="mt-2 text-xs text-slate-500">{{ $copy }}</p>
-                    </article>
+                    </div>
                 @endforeach
             </div>
+
         </div>
     </section>
+    <section id="gallery" class="bg-white py-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
-    <section id="events" class="bg-white py-20">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="mb-10 flex items-end justify-between gap-6">
-                <div>
-                    <h2 class="text-4xl font-medium uppercase tracking-normal text-slate-950">Upcoming Events</h2>
-                    <p class="mt-3 text-sm text-slate-500">Live updates from the Gordon College event registry.</p>
-                </div>
-                <a href="{{ route('login') }}" class="hidden text-xs font-black uppercase tracking-wider text-[#007a34] hover:text-[#00662b] sm:inline-flex">View all</a>
+            <div class="text-center mb-14 home-animate-fade-in-delay">
+                <h3 class="text-3xl font-bold text-gray-900 mb-3">Moments on Campus</h3>
+                <p class="text-lg text-gray-500 max-w-xl mx-auto">
+                    Discover highlights from campus life and student activities.
+                </p>
             </div>
 
-            <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
-                @forelse ($upcomingEvents->take(3) as $event)
-                    <x-event-card :event="$event" />
-                @empty
-                    <div class="col-span-full rounded-2xl border border-slate-100 bg-slate-50 py-16 text-center">
-                        <h3 class="text-lg font-black text-slate-950">No upcoming events</h3>
-                        <p class="mt-2 text-slate-500">Check back later for new activities.</p>
+            @php
+                $gallery = [
+                    ['img' => 'assets/APERTURA.png', 'label' => 'Apertura Event'],
+                    ['img' => 'assets/SPORTSFEST.png', 'label' => 'SportsFest'],
+                    ['img' => 'assets/campusEvent.jpg', 'label' => 'Campus Activity'],
+                    ['img' => 'assets/gcAct.jpg', 'label' => 'Fun run'],
+                    ['img' => 'assets/gcSeminar.jpg', 'label' => 'GC Seminar'],
+                    ['img' => 'assets/socialGc.jpg', 'label' => 'Social Gathering'],
+                ];
+            @endphp
+
+            <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                @foreach ($gallery as $item)
+                    <div
+                        class="group relative overflow-hidden rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 h-64">
+                        <img src="{{ asset($item['img']) }}" alt="{{ $item['label'] }}"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                            loading="lazy">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
+                            <h4 class="text-white font-bold text-base">{{ $item['label'] }}</h4>
+                        </div>
                     </div>
-                @endforelse
+                @endforeach
             </div>
-        </div>
-    </section>
 
-    <section class="bg-white pb-20">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="rounded-[2rem] bg-[#007a34] px-8 py-16 text-center text-white">
-                <h2 class="text-4xl font-medium uppercase leading-tight tracking-normal">Ready to organize<br class="hidden sm:block"> your next event?</h2>
-                <p class="mx-auto mt-5 max-w-2xl text-sm leading-6 text-white/75">Join campus teams using GC-EMS to coordinate schedules, registrations, and event logistics.</p>
-                <div class="mt-8 flex flex-wrap justify-center gap-3">
-                    <a href="{{ route('login') }}" class="rounded-xl bg-white px-6 py-3 text-sm font-black text-[#007a34]">Create Your First Event</a>
-                    <a href="#" class="rounded-xl border border-white/25 px-6 py-3 text-sm font-black text-white">Contact Support</a>
-                </div>
-            </div>
         </div>
     </section>
-</x-layouts.guest>
+@endsection

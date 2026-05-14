@@ -64,6 +64,32 @@
             }
         }">
 
+        <!-- Mobile Filter -->
+        <div class="mb-6 space-y-3 md:hidden">
+            <form method="GET" action="{{ route('users.index') }}" class="space-y-3">
+                <div class="relative">
+                    <svg class="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    <input name="search" value="{{ request('search') }}" class="gc-input w-full rounded-2xl py-3.5 pl-12 pr-4 text-sm" type="search" placeholder="Search users...">
+                </div>
+                <div class="flex gap-2">
+                    <div class="relative flex-1">
+                        <select name="role" onchange="this.form.submit()" class="gc-input w-full appearance-none rounded-2xl py-3.5 pl-4 pr-10 text-sm bg-white">
+                            <option value="">All Roles</option>
+                            <option value="student" @selected(request('role') === 'student')>Student</option>
+                            <option value="admin" @selected(request('role') === 'admin')>Admin</option>
+                            <option value="super_admin" @selected(request('role') === 'super_admin')>Super Admin</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-400">
+                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                    </div>
+                    @if(request('search') || request('role'))
+                        <a href="{{ route('users.index') }}" class="flex items-center justify-center rounded-2xl bg-red-50 px-5 text-sm font-bold text-red-500">Clear</a>
+                    @endif
+                </div>
+            </form>
+        </div>
+
         <!-- Mobile View (Cards) -->
         <section class="space-y-4 md:hidden">
             @foreach ($users as $user)
@@ -105,10 +131,28 @@
         <!-- Desktop View (Table) -->
         <section class="gc-card hidden overflow-hidden rounded-[1.8rem] md:block">
             <div class="border-b border-slate-100 p-6">
-                <div class="relative max-w-lg">
-                    <svg class="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                    <input class="gc-input w-full rounded-2xl py-3 pl-12 pr-4 text-sm" type="search" placeholder="Filter by name, campus ID, or email...">
-                </div>
+                <form method="GET" action="{{ route('users.index') }}" class="flex items-center gap-4">
+                    <div class="relative flex-1 max-w-lg">
+                        <svg class="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        <input name="search" value="{{ request('search') }}" class="gc-input w-full rounded-2xl py-3 pl-12 pr-4 text-sm" type="search" placeholder="Filter by name, campus ID, or email...">
+                    </div>
+                    
+                    <div class="relative w-48">
+                        <select name="role" onchange="this.form.submit()" class="gc-input w-full appearance-none rounded-2xl py-3 pl-4 pr-10 text-sm bg-white">
+                            <option value="">All Roles</option>
+                            <option value="student" @selected(request('role') === 'student')>Student</option>
+                            <option value="admin" @selected(request('role') === 'admin')>Admin</option>
+                            <option value="super_admin" @selected(request('role') === 'super_admin')>Super Admin</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-400">
+                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                    </div>
+
+                    @if(request('search') || request('role'))
+                        <a href="{{ route('users.index') }}" class="text-sm font-bold text-red-500 hover:text-red-600 transition-colors">Clear</a>
+                    @endif
+                </form>
             </div>
             <div class="overflow-x-auto">
                 <table class="min-w-full divide-y divide-gray-100 text-left text-sm">

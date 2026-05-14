@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'GC-EMS') }}</title>
+    <title>{{ config('app.name', 'GCEP - Gordon College Event Portal') }}</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -26,10 +26,8 @@
                     <!-- Logo -->
                     <div class="shrink-0 flex items-center">
                         <a href="{{ url('/') }}" class="text-sm font-black tracking-tight text-slate-950 flex items-center gap-2">
-                            <div class="w-8 h-8 bg-[#007a34] rounded-xl flex items-center justify-center text-white shadow-md shadow-green-700/15">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                            </div>
-                            GC-EMS
+                            <img src="{{ asset('assets/gclogo.png') }}" alt="Gordon College Logo" class="w-8 h-8 object-contain">
+                            GCEP
                         </a>
                     </div>
                     <div class="hidden md:flex items-center gap-6 text-xs font-semibold text-slate-600">
@@ -92,8 +90,8 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid gap-10 md:grid-cols-4">
                 <div>
-                    <p class="text-sm font-black text-white">GC-EMS</p>
-                    <p class="mt-4 max-w-xs text-sm leading-6 text-slate-400">Campus event coordination for Gordon College.</p>
+                    <p class="text-sm font-black text-white">GCEP</p>
+                    <p class="mt-4 max-w-xs text-sm leading-6 text-slate-400">Official Gordon College Event Portal.</p>
                 </div>
                 <div>
                     <p class="text-xs font-bold uppercase tracking-[0.18em] text-white">System</p>
@@ -112,13 +110,13 @@
                 <div>
                     <p class="text-xs font-bold uppercase tracking-[0.18em] text-white">Legal</p>
                     <div class="mt-4 space-y-2 text-sm text-slate-400">
-                        <a href="#" class="block hover:text-white">Privacy Policy</a>
-                        <a href="#" class="block hover:text-white">Terms of Use</a>
+                        <a href="{{ route('privacy') }}" class="block hover:text-white">Privacy Policy</a>
+                        <a href="{{ route('terms') }}" class="block hover:text-white">Terms of Use</a>
                     </div>
                 </div>
             </div>
             <div class="mt-10 border-t border-white/10 pt-6 text-xs text-slate-500">
-                &copy; {{ date('Y') }} Gordon College Event Management System. All rights reserved.
+                &copy; {{ date('Y') }} GCEP - Gordon College Event Portal. All rights reserved.
             </div>
         </div>
     </footer>
